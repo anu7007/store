@@ -11,7 +11,7 @@ try
     $email = $_POST['email'];
     $password = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
-    //Verifcation 
+    //Verification 
     if (empty($full_name) || empty($username) || empty($email) || empty($password) || empty($confirm_password))
         {
         echo "Complete all fields";

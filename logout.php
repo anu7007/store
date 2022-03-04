@@ -5,5 +5,8 @@ $_SESSION['username'] = "";
 $_SESSION['email'] = "";
 $_SESSION['password'] = "";
 $_SESSION['confirm_password'] = "";
-if(empty($_SESSION['email'])) header("location: index.php");
+unset($_SESSION);
+if(empty($_SESSION['email'])) 
+header("location: login.html");
+session_destroy();
 ?>
