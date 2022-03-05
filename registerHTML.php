@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -38,21 +41,28 @@
   <form action="register.php" method="POST">
     <h1 class="h3 mb-3 fw-normal">Create an Account</h1>
     <div class="form-floating">
-      <input type="text" class="form-control" id="floatingInput" placeholder="Full Name" name="full_name" required>
+      <input type="text" class="form-control" id="floatingInput" placeholder="Full Name" name="full_name" value="<?php echo isset($_SESSION['full_name']) ? $_SESSION['full_name'] : ''; ?>">
     </div>
     <div class="form-floating">
-      <input type="text" class="form-control" id="floatingInput" placeholder="UserName" name="username" required>
+      <input type="text" class="form-control" id="floatingInput" placeholder="UserName" name="username" value="<?php echo isset($_SESSION['username']) ? $_SESSION['username'] : ''; ?>">
     </div>
     <div class="form-floating">
-      <input type="email" class="form-control" id="floatingInput" placeholder="Email" name="email" required>
+      <input type="email" class="form-control" id="floatingInput" placeholder="Email" name="email" value="<?php echo isset($_SESSION['email']) ? $_SESSION['email'] : ''; ?>">
     </div>
     <div class="form-floating">
-      <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password" required>
+      <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
     </div>
     <div class="form-floating">
-      <input type="password" class="form-control" id="floatingPassword" placeholder="Confirm_Password"name="confirm_password" required>
+      <input type="password" class="form-control" id="floatingPassword" placeholder="Confirm_Password"name="confirm_password">
     </div>
     </div>
+    <span class="registerError">
+       <?php
+       print_r($_SESSION['error']);
+       $_SESSION['error']="";
+       ?>
+       <br>
+    </span>
     <input type="submit" name="register" value="Sign Up" class="registerbtn">
     <!-- <button class="w-100 btn btn-lg btn-primary" type="submit" name="register">Sign Up</button> -->
     <p class="text-center text-muted mt-5 mb-0">Already have an account? <a href="loginHTML.php" class="fw-bold text-body"><u>Login here</u></a></p>

@@ -64,7 +64,7 @@ session_start();
       ?>
     </span>
     <input class="loginbtn" type="submit" value="SignIn" name="login">
-    <p class="text-center text-muted mt-5 mb-0">Don't have an account? <a href="register.html" class="fw-bold text-body"><u>Register here</u></a></p>
+    <p class="text-center text-muted mt-5 mb-0">Don't have an account? <a href="registerHTML.php" class="fw-bold text-body"><u>Register here</u></a></p>
 
     <p class="mt-5 mb-3 text-muted">&copy; CEDCOSS Technologies</p>
   </form>

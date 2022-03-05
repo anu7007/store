@@ -4,85 +4,78 @@ require_once ('connect.php');
 require_once ('config.php');
 if(ISSET($_POST['register']))
 {
-try 
-{
-    $full_name = $_POST['full_name'];
-    $username = $_POST['username'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    $confirm_password = $_POST['confirm_password'];
-    //Verification 
-    if (empty($full_name) || empty($username) || empty($email) || empty($password) || empty($confirm_password))
-        {
-        // echo "Complete all fields";
-        ?>
-        <script>window.alert("Please fill all the fields.");</script>
-    <?php
-        }
-
-    // Password match
-    if ($password != $confirm_password)
-        {
-            ?>
-        <script>window.alert("Password and confirm password don't match.");</script>
-    <?php
-        $passmatch = "Passwords don't match";
-        }
-
-    // Email validation
-
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL))
-        {
-        $emailvalid = "Enter a  valid email";
-        ?>
-        <script>window.alert("Please enter a valid email");
-    </script>
-    <?php
-        }
-
-    // Password length
-    if (strlen($password) <= 6){
-        $passlength="Choose a password longer then 6 character";
-        ?>
-        <script>
-        window.alert("Choose a password longer then 6 character");
-        // window.location='register.html';
-        </script>
-        <?php
-        header('location:register.html');
-    }
-    function userExists($conn,$email)
+    $errors[] = $_SESSION['error'] = "";
+    try 
     {
-        $userQuery = ("SELECT * FROM register WHERE email='$email'");
-        $stmt = $conn->prepare($userQuery);
-        $stmt->execute();
-        return !!$stmt->fetch(PDO::FETCH_ASSOC);
-    }
+            $full_name = $_SESSION['full_name']= $_POST['full_name'];
+            $username = $_SESSION['username']= $_POST['username'];
+            $email = $_SESSION['email']= $_POST['email'];
+            $password = $_POST['password'];
+            $confirm_password = $_POST['confirm_password'];
+            //Verification 
+            if (empty($full_name) || empty($username) || empty($email) || empty($password) || empty($confirm_password))
+                {
+                    $error[] = $_SESSION['error'] = "*Please fill all the fields";
+                    header('location:registerHTML.php');
+                // echo "Complete all fields";
+                
+                }
 
-    $email = $_POST['email'];
-    $exists = userExists($conn,$email);
-    if($exists)
+            // Password match
+            
+
+            // Email validation
+
+            else if (!filter_var($email, FILTER_VALIDATE_EMAIL))
+                {
+                    $error[]=$emailvalid = $_SESSION['error'] ="Enter a  valid email";
+                    header('location:registerHTML.php');
+            
+                }
+
+            // Password length
+            else if (strlen($password) <= 6){
+                $error[]= $passlength=$_SESSION['error'] ="Choose a password longer then 6 character";
+                header('location:registerHTML.php');
+            }
+            //password match
+            else if ($password != $confirm_password)
+                    {
+                    $error[] = $_SESSION = $passmatch = "Passwords don't match";
+                    header('location:registerHTML.php');
+                    }
+            function userExists($conn,$email)
+            {
+                $userQuery = ("SELECT * FROM register WHERE email='$email'");
+                $stmt = $conn->prepare($userQuery);
+                $stmt->execute();
+                return !!$stmt->fetch(PDO::FETCH_ASSOC);
+            }
+
+            $email = $_POST['email'];
+            $exists = userExists($conn,$email);
+            if($exists)
+            {
+                $error[] = $_SESSION['error'] ="*Email already exists. Try with a different email";
+                header('location:registerHTML.php');
+            }
+            else
+            {
+                // user doesn't exist already, you can safely insert him.
+                if(empty($passmatch) && empty($emailvalid) && empty($passlength)) {
+
+                //Securely insert into database
+                $sql = "INSERT INTO `register` VALUES ('$full_name', '$username', '$email', '$password', '$confirm_password')";    
+                $conn->exec($sql);
+                header('location:loginHTML.php');
+                }
+            }
+
+    } //try
+    catch (PDOException $e)
     {
-        ?>
-        <script>window.alert("email exists already.");</script>
-    <?php
-    }
-    else
-    {
-        // user doesn't exist already, you can safely insert him.
-        if(empty($passmatch) && empty($emailvalid) && empty($passlength)) {
-
-        //Securely insert into database
-        $sql = "INSERT INTO `register` VALUES ('$full_name', '$username', '$email', '$password', '$confirm_password')";    
-        $conn->exec($sql);
-        header('location:login.html');
-        }
+        exit($e->getMessage());
     }
 
-} catch (PDOException $e)
-{
-    exit($e->getMessage());
-}
-
-}
+}//if
 ?>
