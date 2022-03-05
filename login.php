@@ -19,10 +19,12 @@ if(isset($_POST['login'])) {
                 $_SESSION['email']   = $row['email'];
                 $_SESSION['full_name'] = $row['full_name'];
                 $_SESSION['username'] = $row['username'];
-                header('location:dashboard.html');
+                header('location:dashboard.php');
                 // echo "Hello"."$username";
                 } 
+            
             else
+
             {
                
                 $msg = $_SESSION['msg'] = "*Invalid username and password!";

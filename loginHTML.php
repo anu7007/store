@@ -59,8 +59,8 @@ session_start();
     </div>
     <span class="loginMsg">
       <?php
-      echo $_SESSION['msg'];
-      $_SESSION['msg']="";
+      echo isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
+      // $_SESSION['msg']="";
       ?>
     </span>
     <input class="loginbtn" type="submit" value="SignIn" name="login">
