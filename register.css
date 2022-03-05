@@ -42,10 +42,12 @@ body {
   background-color: rgb(74, 202, 74);
   border: none;
   border-radius: 15px;
-  width: 100%;
+  transition: 0.5s;
+  width: 50%;
 }
 .registerbtn:hover{
   background-color: rgb(38, 41, 226);
   color: whitesmoke;
   transition: 0.5s;
+  width: 100%;
 }

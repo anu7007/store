@@ -14,25 +14,42 @@ try
     //Verification 
     if (empty($full_name) || empty($username) || empty($email) || empty($password) || empty($confirm_password))
         {
-        echo "Complete all fields";
+        // echo "Complete all fields";
+        ?>
+        <script>window.alert("Please fill all the fields.");</script>
+    <?php
         }
 
     // Password match
     if ($password != $confirm_password)
         {
-        echo $passmatch = "Passwords don't match";
+            ?>
+        <script>window.alert("Password and confirm password don't match.");</script>
+    <?php
+        $passmatch = "Passwords don't match";
         }
 
     // Email validation
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL))
         {
-        echo $emailvalid = "Enter a  valid email";
+        $emailvalid = "Enter a  valid email";
+        ?>
+        <script>window.alert("Please enter a valid email");
+    </script>
+    <?php
         }
 
     // Password length
     if (strlen($password) <= 6){
-        echo $passlength="Choose a password longer then 6 character";
+        $passlength="Choose a password longer then 6 character";
+        ?>
+        <script>
+        window.alert("Choose a password longer then 6 character");
+        // window.location='register.html';
+        </script>
+        <?php
+        header('location:register.html');
     }
     function userExists($conn,$email)
     {
@@ -46,22 +63,26 @@ try
     $exists = userExists($conn,$email);
     if($exists)
     {
-        echo "email exists already.";
+        ?>
+        <script>window.alert("email exists already.");</script>
+    <?php
     }
     else
     {
-        // user doesn't exist already, you can savely insert him.
+        // user doesn't exist already, you can safely insert him.
         if(empty($passmatch) && empty($emailvalid) && empty($passlength)) {
 
-        //Securly insert into database
+        //Securely insert into database
         $sql = "INSERT INTO `register` VALUES ('$full_name', '$username', '$email', '$password', '$confirm_password')";    
         $conn->exec($sql);
-        }}
+        header('location:login.html');
+        }
+    }
 
 } catch (PDOException $e)
 {
     exit($e->getMessage());
 }
-header('location:login.html');
+
 }
 ?>

@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -54,6 +57,12 @@
         <input type="checkbox" value="remember-me"> Remember me
       </label>
     </div>
+    <span class="loginMsg">
+      <?php
+      echo $_SESSION['msg'];
+      $_SESSION['msg']="";
+      ?>
+    </span>
     <input class="loginbtn" type="submit" value="SignIn" name="login">
     <p class="text-center text-muted mt-5 mb-0">Don't have an account? <a href="register.html" class="fw-bold text-body"><u>Register here</u></a></p>
 

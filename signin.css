@@ -39,7 +39,7 @@ body {
 }
 
 .loginbtn{
-  background: #1F60F0; color: #eee;
+   background: #111; color: #eee;
   padding: 15px 40px 15px 40px;
   border-radius: 5px;
   width: 200px;
@@ -47,6 +47,10 @@ body {
 }
 
 .loginbtn:hover {
-  background: #111; color: #eee; 
+  background: #1F60F0;
+   color: #eee;
   transition: 0.5s;
+}
+.loginMsg{
+  color: red;
 }
