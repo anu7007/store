@@ -12,6 +12,26 @@ if(ISSET($_POST['register']))
             $email = $_SESSION['email']= $_POST['email'];
             $password = $_POST['password'];
             $confirm_password = $_POST['confirm_password'];
+            function userExists($conn,$email)
+            {
+                // $userQuery = ("SELECT * FROM register WHERE email='$email'");
+                // $stmt = $conn->prepare($userQuery);
+                // $stmt->execute();
+                // return !!$stmt->fetch(PDO::FETCH_ASSOC);
+                $stmt = $conn->prepare( "SELECT * FROM `register` WHERE `email` = '$email'");
+                $stmt->execute();
+                $found = $stmt->fetchColumn();
+                
+                if( $found ) {
+                    return true;
+                    echo "Email found!";
+                } else {
+                    return false;
+                    echo "Email not found!";
+                }
+            }//function
+            $exists = userExists($conn,$email);
+
             //Verification 
             if (empty($full_name) || empty($username) || empty($email) || empty($password) || empty($confirm_password))
                 {
@@ -20,10 +40,6 @@ if(ISSET($_POST['register']))
                 // echo "Complete all fields";
                 
                 }
-
-            // Password match
-            
-
             // Email validation
 
             else if (!filter_var($email, FILTER_VALIDATE_EMAIL))
@@ -35,26 +51,19 @@ if(ISSET($_POST['register']))
 
             // Password length
             else if (strlen($password) <= 6){
-                $error[]= $passlength=$_SESSION['error'] ="Choose a password longer then 6 character";
+                $error[]= $passlength=$_SESSION['error'] ="Choose a password longer than 6 character";
                 header('location:registerHTML.php');
             }
             //password match
             else if ($password != $confirm_password)
                     {
-                    $error[] = $_SESSION = $passmatch = "Passwords don't match";
+                    $error[] = $_SESSION['error'] = $passmatch = "Passwords don't match";
                     header('location:registerHTML.php');
                     }
-            function userExists($conn,$email)
-            {
-                $userQuery = ("SELECT * FROM register WHERE email='$email'");
-                $stmt = $conn->prepare($userQuery);
-                $stmt->execute();
-                return !!$stmt->fetch(PDO::FETCH_ASSOC);
-            }
-
-            $email = $_POST['email'];
-            $exists = userExists($conn,$email);
-            if($exists)
+            
+            // $email = $_POST['email'];
+            
+            else if($exists)
             {
                 $error[] = $_SESSION['error'] ="*Email already exists. Try with a different email";
                 header('location:registerHTML.php');
@@ -68,6 +77,9 @@ if(ISSET($_POST['register']))
                 $sql = "INSERT INTO `register` VALUES ('$full_name', '$username', '$email', '$password', '$confirm_password')";    
                 $conn->exec($sql);
                 header('location:loginHTML.php');
+                }
+                else{
+                    $_SESSION['error']="Some Error Occured";
                 }
             }
 

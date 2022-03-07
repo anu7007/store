@@ -8,9 +8,12 @@ if(isset($_SESSION)){
     $_SESSION['password'] = "";
     $_SESSION['confirm_password'] = "";
     unset($_SESSION);
-    if(empty($_SESSION['email']))  session_destroy();
-    header("location: loginHTML.php");
+    if(empty($_SESSION)){  session_destroy();
+    header("location: loginHTML.php");}
    
     
+}
+else {
+    echo "Session Expired!!";
 }
 ?>

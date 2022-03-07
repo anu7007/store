@@ -1,5 +1,9 @@
 <?php
 session_start();
+if(!isset($_SESSION['username'])){
+  echo "Session Expired!!  ";
+  echo "You cannot access dashboard without login!Kindly   "?><a href="loginHTML.php">login</a><?php
+}else{
 echo "Hello,"."  ". $_SESSION['username'];
 ?>
 <!doctype html>
@@ -153,3 +157,5 @@ echo "Hello,"."  ". $_SESSION['username'];
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
   </body>
 </html>
+<?php }
+?>

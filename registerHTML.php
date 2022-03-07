@@ -59,6 +59,7 @@ session_start();
     <span class="registerError">
        <?php
        echo isset($_SESSION['error']) ? $_SESSION['error'] : '';
+      //  echo isset($_SESSION['error1']) ? $_SESSION['error1'] : '';
        ?>
        <br>
     </span>
