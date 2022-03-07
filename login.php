@@ -19,6 +19,8 @@ if(isset($_POST['login'])) {
                 $_SESSION['email']   = $row['email'];
                 $_SESSION['full_name'] = $row['full_name'];
                 $_SESSION['username'] = $row['username'];
+                $_SESSION['loginmail'] = $_POST['email'];
+                $_SESSION['loginpassword'] = $_POST['password'];
                 header('location:dashboard.php');
                 // echo "Hello"."$username";
                 } 

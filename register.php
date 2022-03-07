@@ -24,10 +24,10 @@ if(ISSET($_POST['register']))
                 
                 if( $found ) {
                     return true;
-                    echo "Email found!";
+                   
                 } else {
                     return false;
-                    echo "Email not found!";
+                   
                 }
             }//function
             $exists = userExists($conn,$email);

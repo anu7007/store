@@ -1,10 +1,10 @@
 <?php
 session_start();
-if(!isset($_SESSION['username'])){
+if(!isset($_SESSION['loginmail']) && !isset($_SESSION['loginpassword'])){
   echo "Session Expired!!  ";
   echo "You cannot access dashboard without login!Kindly   "?><a href="loginHTML.php">login</a><?php
-}else{
-echo "Hello,"."  ". $_SESSION['username'];
+}
+else{
 ?>
 <!doctype html>
 <html lang="en">
@@ -53,7 +53,15 @@ echo "Hello,"."  ". $_SESSION['username'];
   </button>
   <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
   <div class="navbar-nav">
-    <div class="nav-item text-nowrap">
+  <div class="nav-item text-nowrap bg-success pt-2 pb-2">
+  <?php 
+  echo "Hello,"."  ". $_SESSION['username'];
+  ?>
+  </div>
+  </div>
+
+  <div class="navbar-nav">
+    <div class="nav-item text-nowrap bg-danger">
       <a class="nav-link px-3" href="logout.php">Sign out</a>
     </div>
   </div>
@@ -157,5 +165,6 @@ echo "Hello,"."  ". $_SESSION['username'];
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
   </body>
 </html>
-<?php }
+<?php 
+}
 ?>
