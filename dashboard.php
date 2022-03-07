@@ -53,7 +53,7 @@ else{
   </button>
   <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
   <div class="navbar-nav">
-  <div class="nav-item text-nowrap bg-success pt-2 pb-2">
+  <div class="nav-item text-nowrap btn btn-success pt-2 pb-2 px-2">
   <?php 
   echo "Hello,"."  ". $_SESSION['username'];
   ?>
@@ -61,8 +61,8 @@ else{
   </div>
 
   <div class="navbar-nav">
-    <div class="nav-item text-nowrap bg-danger">
-      <a class="nav-link px-3" href="logout.php">Sign out</a>
+    <div class="nav-item text-nowrap">
+      <a class="nav-link px-3 btn btn-outline-danger" href="logout.php">Sign out</a>
     </div>
   </div>
 </header>
