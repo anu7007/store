@@ -21,15 +21,19 @@ if(isset($_POST['login'])) {
                 $_SESSION['username'] = $row['username'];
                 $_SESSION['loginmail'] = $_POST['email'];
                 $_SESSION['loginpassword'] = $_POST['password'];
-                header('location:dashboard.php');
-                // echo "Hello"."$username";
+                if($row['role']=="admin" && $row['status']=="approved"){ header('location:dashboard.php');}
+                else if($row['role']=="user" && $row['status']=="approved"){header('location:profile.php');}
+                else{
+                $_SESSION['msg']="Your Request is in Queue." .'<br>'."Kindly wait for Approval".'<br><br>';
+                header('location:loginHTML.php');
                 } 
+            }
             
             else
 
             {
                
-                $msg = $_SESSION['msg'] = "*Invalid username and password!";
+                $msg = $_SESSION['msg'] = "*Invalid username and password!".'<br><br>';
                 header('location:loginHTML.php');
             }
          } 
@@ -39,7 +43,7 @@ if(isset($_POST['login'])) {
         } 
     else 
     {
-        $msg = $_SESSION['msg'] = "*Both fields are required!";
+        $msg = $_SESSION['msg'] = "*Both fields are required!"."<br><br>";
         header('location:loginHTML.php');
      
     }

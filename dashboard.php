@@ -51,9 +51,9 @@ else{
   <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+  <input class="form-control form-control-dark w-100 mr-5" type="text" placeholder="Search" aria-label="Search">
   <div class="navbar-nav">
-  <div class="nav-item text-nowrap btn btn-success pt-2 pb-2 px-2">
+  <div class="nav-item text-nowrap bg-info text-white btn btn-outline-info pt-2 pb-2  px-5 mr-2">
   <?php 
   echo "Hello,"."  ". $_SESSION['username'];
   ?>
@@ -62,7 +62,7 @@ else{
 
   <div class="navbar-nav">
     <div class="nav-item text-nowrap">
-      <a class="nav-link px-3 btn btn-outline-danger" href="logout.php">Sign out</a>
+      <a class="nav-link px-3 mr-" href="logout.php">Sign out</a>
     </div>
   </div>
 </header>
@@ -73,7 +73,7 @@ else{
       <div class="position-sticky pt-3">
         <ul class="nav flex-column">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="dashboard.html">
+            <a class="nav-link active" aria-current="page" href="dashboard.php">
               <span data-feather="home"></span>
               Dashboard
             </a>
@@ -116,7 +116,7 @@ else{
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Dashboard</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
-          <div class="btn-group me-2">
+          <div class="btn-group me-2" float-left>
             <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
             <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
           </div>

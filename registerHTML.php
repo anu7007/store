@@ -42,18 +42,23 @@ session_start();
     <h1 class="h3 mb-3 fw-normal">Create an Account</h1>
     <div class="form-floating">
       <input type="text" class="form-control" id="floatingInput" placeholder="Full Name" name="full_name" value="<?php echo isset($_SESSION['full_name']) ? $_SESSION['full_name'] : ''; ?>">
+      <label for="floatingInput">Full Name</label>
     </div>
     <div class="form-floating">
-      <input type="text" class="form-control" id="floatingInput" placeholder="UserName" name="username" value="<?php echo isset($_SESSION['username']) ? $_SESSION['username'] : ''; ?>">
+      <input type="text" class="form-control mt-1" id="floatingInput" placeholder="UserName" name="username" value="<?php echo isset($_SESSION['username']) ? $_SESSION['username'] : ''; ?>">
+      <label for="floatingInput">Username</label>
     </div>
     <div class="form-floating">
-      <input type="email" class="form-control" id="floatingInput" placeholder="Email" name="email" value="<?php echo isset($_SESSION['email']) ? $_SESSION['email'] : ''; ?>">
+      <input type="email" class="form-control mt-1" id="floatingInput" placeholder="Email" name="email" value="<?php echo isset($_SESSION['email']) ? $_SESSION['email'] : ''; ?>">
+      <label for="floatingInput">Email address</label>
     </div>
     <div class="form-floating">
-      <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
+      <input type="password" class="form-control mt-1" id="floatingPassword" placeholder="Password" name="password">
+      <label for="floatingInput">Password</label>
     </div>
     <div class="form-floating">
-      <input type="password" class="form-control" id="floatingPassword" placeholder="Confirm_Password"name="confirm_password">
+      <input type="password" class="form-control mt-1" id="floatingPassword" placeholder="Confirm_Password"name="confirm_password">
+      <label for="floatingInput">Confirm Password</label>
     </div>
     </div>
     <span class="registerError">

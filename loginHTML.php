@@ -48,9 +48,11 @@ session_start();
 
     <div class="form-floating">
       <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="email">
+      <label for="floatingInput">Email address</label>
     </div>
     <div class="form-floating">
       <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
+      <label for="floatingInput">Password</label>
     </div>
 
     <div class="checkbox mb-3">
@@ -60,7 +62,7 @@ session_start();
     </div>
     <span class="loginMsg">
       <?php
-      echo isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
+      print_r(isset($_SESSION['msg']) ? $_SESSION['msg'] : '');
       // $_SESSION['msg']="";
       ?>
     </span>

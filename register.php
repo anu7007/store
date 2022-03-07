@@ -74,7 +74,7 @@ if(ISSET($_POST['register']))
                 if(empty($passmatch) && empty($emailvalid) && empty($passlength)) {
 
                 //Securely insert into database
-                $sql = "INSERT INTO `register` VALUES ('$full_name', '$username', '$email', '$password', '$confirm_password')";    
+                $sql = "INSERT INTO `register` VALUES ('$full_name', '$username', '$email', '$password', '$confirm_password','pending','user')";    
                 $conn->exec($sql);
                 header('location:loginHTML.php');
                 }
