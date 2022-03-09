@@ -13,7 +13,8 @@ session_start();
 
     <!-- Bootstrap core CSS -->
     <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" 
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="register.css" rel="stylesheet">
     <style>
       .bd-placeholder-img {
@@ -41,15 +42,18 @@ session_start();
   <form action="register.php" method="POST">
     <h1 class="h3 mb-3 fw-normal">Create an Account</h1>
     <div class="form-floating">
-      <input type="text" class="form-control" id="floatingInput" placeholder="Full Name" name="full_name" value="<?php echo isset($_SESSION['full_name']) ? $_SESSION['full_name'] : ''; ?>">
+      <input type="text" class="form-control" id="floatingInput" placeholder="Full Name" name="full_name" 
+      value="<?php echo isset($_SESSION['full_name']) ? $_SESSION['full_name'] : ''; ?>">
       <label for="floatingInput">Full Name</label>
     </div>
     <div class="form-floating">
-      <input type="text" class="form-control mt-1" id="floatingInput" placeholder="UserName" name="username" value="<?php echo isset($_SESSION['username']) ? $_SESSION['username'] : ''; ?>">
+      <input type="text" class="form-control mt-1" id="floatingInput" placeholder="UserName" name="username" 
+      value="<?php echo isset($_SESSION['username']) ? $_SESSION['username'] : ''; ?>">
       <label for="floatingInput">Username</label>
     </div>
     <div class="form-floating">
-      <input type="email" class="form-control mt-1" id="floatingInput" placeholder="Email" name="email" value="<?php echo isset($_SESSION['email']) ? $_SESSION['email'] : ''; ?>">
+      <input type="email" class="form-control mt-1" id="floatingInput" placeholder="Email" name="email"
+       value="<?php echo isset($_SESSION['email']) ? $_SESSION['email'] : ''; ?>">
       <label for="floatingInput">Email address</label>
     </div>
     <div class="form-floating">
@@ -57,20 +61,22 @@ session_start();
       <label for="floatingInput">Password</label>
     </div>
     <div class="form-floating">
-      <input type="password" class="form-control mt-1" id="floatingPassword" placeholder="Confirm_Password"name="confirm_password">
+      <input type="password" class="form-control mt-1" id="floatingPassword" 
+      placeholder="Confirm_Password"name="confirm_password">
       <label for="floatingInput">Confirm Password</label>
     </div>
     </div>
     <span class="registerError">
-       <?php
-       echo isset($_SESSION['error']) ? $_SESSION['error'] : '';
+        <?php
+        echo isset($_SESSION['error']) ? $_SESSION['error'] : '';
       //  echo isset($_SESSION['error1']) ? $_SESSION['error1'] : '';
-       ?>
+        ?>
        <br>
     </span>
     <input type="submit" name="register" value="Sign Up" class="registerbtn">
     <!-- <button class="w-100 btn btn-lg btn-primary" type="submit" name="register">Sign Up</button> -->
-    <p class="text-center text-muted mt-5 mb-0">Already have an account? <a href="loginHTML.php" class="fw-bold text-body"><u>Login here</u></a></p>
+    <p class="text-center text-muted mt-5 mb-0">Already have an account? 
+      <a href="loginHTML.php" class="fw-bold text-body"><u>Login here</u></a></p>
 
     <p class="mt-5 mb-3 text-muted">&copy; CEDCOSS Technologies</p>
   </form>

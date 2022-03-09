@@ -71,7 +71,7 @@ if (!isset($_SESSION['loginmail']) && !isset ($_SESSION['loginpassword'])) {
 
   <div class="navbar-nav">
     <div class="nav-item text-nowrap">
-      <a class="nav-link px-3{ mr-" href="logout.php">Sign out</a>
+      <a class="nav-link px-3 mr-" href="logout.php">Sign out</a>
     </div>
   </div>
  </header>
@@ -147,10 +147,12 @@ if (!isset($_SESSION['loginmail']) && !isset ($_SESSION['loginpassword'])) {
               <th scope="col">User Name</th>
               <th scope="col">Email</th>
               <th scope="col">Status</th>
+              <th scope="col">Change Status</th>
+              <th scope="col">Delete</th>
             </tr>
           </thead>
             <?php
-              $query = "select * from `register` LIMIT 3";
+              $query = "select * from `register`";
               $stmt = $conn->prepare($query);
               $stmt->execute();
             foreach ($stmt as $row) {
@@ -162,6 +164,19 @@ if (!isset($_SESSION['loginmail']) && !isset ($_SESSION['loginpassword'])) {
               <td><?php echo $row['username'];?></td>
               <td><?php echo $row['email'];?></td>
               <td><?php echo $row['status']; ?></td>
+              <td>
+                  <form action="function.php" method="GET">
+                  <input type="hidden" name="statusName" value="<?php echo $row['status'] ?>">
+                  <input type="hidden" name="status" value="<?php echo $row['ID'] ?>">
+                  <input type='submit' class='btn btn-warning' value='Change' >
+            </form>
+                </td>
+              <td>
+              <form action="function.php" method="GET">
+                  <input type="hidden" name="delete" value="<?php echo $row['ID'] ?>">
+                  <input type='submit' class='btn btn-danger' value='Delete'/>
+                </td>
+          </form>
             </tr>
             <?php
             }
