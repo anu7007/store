@@ -177,15 +177,20 @@ if (!isset($_SESSION['loginmail']) && !isset ($_SESSION['loginpassword'])) {
                   <input type='submit' class='btn btn-danger' value='Delete'/>
                 </td>
           </form>
-            </tr>
+            </tr>           
             <?php
             }
                 ?>
           </tbody>
         </table>
       </div>
+      <form action="addUserHTML.php" method="POST">
+        <input type="submit" name="addUser" class="btn btn-primary" value="Add User">
+      </form>
     </main>
+    
   </div>
+  
  </div>
 <?php
 }
