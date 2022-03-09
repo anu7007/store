@@ -41,7 +41,7 @@ if (isset($_POST['addUser'])) {
                 //Securely insert into database
                 $sql = "INSERT INTO register (full_name, username, email, password, confirm_password, status, role) 
                 VALUES 
-                ('$full_name', '$username', '$email', '$password', '$confirm_password','pending','user')";
+                ('$full_name', '$username', '$email', '$password', '$password','pending','user')";
                 $conn->exec($sql);
                 header('location:customers.php');
             } else {

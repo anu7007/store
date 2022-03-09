@@ -1,16 +1,10 @@
 <?php
 session_start();
-require_once 'connect.php';
-require_once 'config.php';
-if (!isset($_SESSION['loginmail']) && !isset ($_SESSION['loginpassword'])) {
-    echo "Session Expired!!  ";
-    echo "You cannot access dashboard without login!Kindly   "?><a href="loginHTML.php">login</a><?php
-} else {
-            $query = "select * from `register`";
-            $stmt = $conn->prepare($query);
-            $stmt->execute();
-            $count = $stmt->rowCount();
-            $row   = $stmt->fetch(PDO::FETCH_ASSOC);
+include "config.php";
+include "connect.php";
+// if (isset($_POST['addProduct'])) {
+
+// }
 ?>
 <!doctype html>
 <html lang="en">
@@ -20,7 +14,7 @@ if (!isset($_SESSION['loginmail']) && !isset ($_SESSION['loginpassword'])) {
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.88.1">
-    <title>Customers</title>
+    <title>Add Product</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" 
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" 
     crossorigin="anonymous">
@@ -40,6 +34,7 @@ if (!isset($_SESSION['loginmail']) && !isset ($_SESSION['loginpassword'])) {
         -moz-user-select: none;
         user-select: none;
       }
+
       @media (min-width: 768px) {
         .bd-placeholder-img-lg {
           font-size: 3.5rem;
@@ -53,30 +48,22 @@ if (!isset($_SESSION['loginmail']) && !isset ($_SESSION['loginpassword'])) {
   </head>
   <body>
     
- <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
   <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Company name</a>
   <button class="navbar-toggler position-absolute d-md-none collapsed" 
   type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" 
   aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <input class="form-control form-control-dark w-100 mr-5" type="text" placeholder="Search" aria-label="Search">
-  <div class="navbar-nav">
-  <div class="nav-item text-nowrap bg-info text-white btn btn-outline-info pt-2 pb-2  px-5 mr-2">
-    <?php
-    echo "Hello,"."  ". $_SESSION['username'];
-    ?>
-  </div>
-  </div>
-
+  <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
   <div class="navbar-nav">
     <div class="nav-item text-nowrap">
-      <a class="nav-link px-3 mr-" href="logout.php">Sign out</a>
+      <a class="nav-link px-3" href="#">Sign out</a>
     </div>
   </div>
- </header>
+</header>
 
- <div class="container-fluid">
+<div class="container-fluid">
   <div class="row">
     <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
       <div class="position-sticky pt-3">
@@ -117,16 +104,16 @@ if (!isset($_SESSION['loginmail']) && !isset ($_SESSION['loginpassword'])) {
               Integrations
             </a>
           </li>
-        </ul>        
+        </ul>
       </div>
     </nav>
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap 
-      align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Customers</h1>
+      <div class="d-flex justify-content-between flex-wrap 
+      flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Add Product</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
-          <div class="btn-group me-2" float-left>
+          <div class="btn-group me-2">
             <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
             <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
           </div>
@@ -137,64 +124,58 @@ if (!isset($_SESSION['loginmail']) && !isset ($_SESSION['loginpassword'])) {
         </div>
       </div>
 
-      <p class="text text-muted">Top 3 Customers</p>
-      <div class="table-responsive">
-        <table class="table table-striped table-hover">
-          <thead class="table table-dark">
-            <tr>
-              <th scope="col">ID</th>
-              <th scope="col">Full Name</th>
-              <th scope="col">User Name</th>
-              <th scope="col">Email</th>
-              <th scope="col">Status</th>
-              <th scope="col">Change Status</th>
-              <th scope="col">Delete</th>
-            </tr>
-          </thead>
-            <?php
-              $query = "select * from `register` order by status desc";
-              $stmt = $conn->prepare($query);
-              $stmt->execute();
-            foreach ($stmt as $row) {
-            ?>
-          <tbody>
-            <tr>
-              <td><?php echo $row['ID'];?></td>
-              <td><?php echo $row['full_name'];?></td>
-              <td><?php echo $row['username'];?></td>
-              <td><?php echo $row['email'];?></td>
-              <td><?php echo $row['status']; ?></td>
-              <td>
-                  <form action="function.php" method="GET">
-                  <input type="hidden" name="statusName" value="<?php echo $row['status'] ?>">
-                  <input type="hidden" name="status" value="<?php echo $row['ID'] ?>">
-                  <input type='submit' class='btn btn-warning' value='Change' >
-            </form>
-                </td>
-              <td>
-              <form action="function.php" method="GET">
-                  <input type="hidden" name="delete" value="<?php echo $row['ID'] ?>">
-                  <input type='submit' class='btn btn-danger' value='Delete'/>
-                </td>
-          </form>
-            </tr>           
-            <?php
-            }
-                ?>
-          </tbody>
-        </table>
-      </div>
-      <form action="addUserHTML.php" method="POST">
-        <input type="submit" name="addUser" class="btn btn-primary" value="Add User">
-      </form>
+      <form method='post' action='' enctype='multipart/form-data'>
+        <div class="col-md-6 my-3">
+          <label for="product_name" class="form-label">Product Name</label>
+          <input type="text" class="form-control" name="product_name">
+        </div>
+        <div class="col-md-6 my-3">
+          <label for="product_category" class="form-label">Product Category</label>
+          <input type="password" class="form-control" name="product_category">
+        </div>
+        <div class="col-6 my-3">
+          <label for="product_price" class="form-label">Product Price</label>
+          <input type="text" class="form-control" name="product_price" placeholder="">
+        </div>
+        <div class="col-md-6 my-3">
+          <label for="product_image" class="form-label">Product Image</label>
+          <input type="file" class="form-control" name="product_image" multiple>
+        </div>
+        <!-- <div class="col-12">
+          <label for="inputAddress2" class="form-label">Address 2</label>
+          <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+        </div>
+        <div class="col-md-6">
+          <label for="inputCity" class="form-label">City</label>
+          <input type="text" class="form-control" id="inputCity">
+        </div>
+        <div class="col-md-4">
+          <label for="inputState" class="form-label">State</label>
+          <select id="inputState" class="form-select">
+            <option selected>Choose...</option>
+            <option>...</option>
+          </select>
+        </div>
+        <div class="col-md-2">
+          <label for="inputZip" class="form-label">Zip</label>
+          <input type="text" class="form-control" id="inputZip">
+        </div>
+        <div class="col-12">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="gridCheck">
+            <label class="form-check-label" for="gridCheck">
+              Check me out
+            </label>
+          </div>
+        </div> -->
+        <div class="col-12 mt-4">
+          <input type="submit" class="btn btn-primary" value="Add Product">
+        </div>
+      </form>      
     </main>
-    
   </div>
-  
- </div>
-<?php
-}
-?>
+</div>
+
 
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js" 
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" 

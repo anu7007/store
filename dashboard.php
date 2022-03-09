@@ -94,7 +94,7 @@ if (!isset($_SESSION['loginmail']) && !isset ($_SESSION['loginpassword'])) {
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="products.html">
+            <a class="nav-link" href="adminProductsList.php">
               <span data-feather="shopping-cart"></span>
               Products
             </a>

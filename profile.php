@@ -109,6 +109,7 @@ if (!isset($_SESSION['username'])) {
     if (isset($_SESSION['username'])) {
     ?>
       <input type="submit" class="btn btn-success" value="Update" name="update"></button>
+      <a href="products.php" class="btn btn-primary">Products</a>
     <?php
     }
 }
