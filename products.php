@@ -1,7 +1,10 @@
 <?php
 session_start();
-require_once 'connect.php';
-require_once 'config.php';
+if (!isset($_SESSION['username'])) {
+    echo 'Kindly  <a href="loginHTML.php">Login</a>  to view Products<?php';
+} else {
+    require_once 'connect.php';
+    require_once 'config.php';
 ?>
 <!doctype html>
 <html lang="en">
@@ -218,3 +221,5 @@ require_once 'config.php';
      crossorigin="anonymous"></script>
   </body>
 </html>
+<?php
+}

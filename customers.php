@@ -62,16 +62,16 @@ if (!isset($_SESSION['loginmail']) && !isset ($_SESSION['loginpassword'])) {
   </button>
   <input class="form-control form-control-dark w-100 mr-5" type="text" placeholder="Search" aria-label="Search">
   <div class="navbar-nav">
-  <div class="nav-item text-nowrap bg-info text-white btn btn-outline-info pt-2 pb-2  px-5 mr-2">
+  <div class="nav-item text-nowrap text-white btn btn-info pt-2 pb-2 px-5 mr-2">
     <?php
-    echo "Hello,"."  ". $_SESSION['username'];
+    echo "Hello,"."  ". strtoupper($_SESSION['username']);
     ?>
   </div>
   </div>
 
   <div class="navbar-nav">
     <div class="nav-item text-nowrap">
-      <a class="nav-link px-3 mr-" href="logout.php">Sign out</a>
+      <a class="nav-link px-3 btn btn-outline-danger mr-2 mt-1 mb-1" href="logout.php">Sign Out</a>
     </div>
   </div>
  </header>
