@@ -49,7 +49,7 @@ if (!isset($_SESSION['loginmail']) && !isset ($_SESSION['loginpassword'])) {
 
     
     <!-- Custom styles for this template -->
-    <link href="./assets/css/dashboard.css" rel="stylesheet">
+    <!-- <link href="./customers.css" rel="stylesheet"> -->
   </head>
   <body>
     
@@ -156,9 +156,10 @@ if (!isset($_SESSION['loginmail']) && !isset ($_SESSION['loginpassword'])) {
               $stmt = $conn->prepare($query);
               $stmt->execute();
             foreach ($stmt as $row) {
+                if ($row['status']=="pending") {
             ?>
           <tbody>
-            <tr>
+            <tr class="bg bg-danger" style='--bs-bg-opacity: .8;'>
               <td><?php echo $row['ID'];?></td>
               <td><?php echo $row['full_name'];?></td>
               <td><?php echo $row['username'];?></td>
@@ -179,6 +180,30 @@ if (!isset($_SESSION['loginmail']) && !isset ($_SESSION['loginpassword'])) {
           </form>
             </tr>           
             <?php
+                } else {
+                ?>
+                  <tr class="bg bg-success" style='--bs-bg-opacity: .7;'>
+              <td><?php echo $row['ID'];?></td>
+              <td><?php echo $row['full_name'];?></td>
+              <td><?php echo $row['username'];?></td>
+              <td><?php echo $row['email'];?></td>
+              <td><?php echo $row['status']; ?></td>
+              <td>
+                  <form action="function.php" method="GET">
+                  <input type="hidden" name="statusName" value="<?php echo $row['status'] ?>">
+                  <input type="hidden" name="status" value="<?php echo $row['ID'] ?>">
+                  <input type='submit' class='btn btn-warning' value='Change' >
+            </form>
+                </td>
+              <td>
+              <form action="function.php" method="GET">
+                  <input type="hidden" name="delete" value="<?php echo $row['ID'] ?>">
+                  <input type='submit' class='btn btn-danger' value='Delete'/>
+                </td>
+          </form>
+            </tr>
+            <?php
+                }
             }
                 ?>
           </tbody>
