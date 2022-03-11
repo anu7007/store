@@ -168,9 +168,9 @@ session_start();
                     <p class='card-text'>".$row['product_category']."</p>
                     <div class='d-flex justify-content-between align-items-center'>
                     <p><strong>"."₹".$row['product_price']."</strong>&nbsp;<del></p>
-                    <form action='cart.php' method='get'>
+                    <form action='cart.php' method='post'>
                     <input type='hidden' name='product_id' value=".$row['product_id'].">
-                    <button type='submit' name='addToCart' class='btn btn-primary'>Add To Cart</button>
+                    <input type='submit' name='addToCart' class='btn btn-primary'>
                     </form>
                     </div>
                     </div>
@@ -178,6 +178,7 @@ session_start();
                     </div>";
                 }
                  echo $a;
+
                 ?>
                 
               

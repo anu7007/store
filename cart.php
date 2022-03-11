@@ -2,18 +2,23 @@
 session_start();
 include 'config.php';
 include 'connect.php';
-if(!$_SESSION['cartItems']){
+if(!isset($_SESSION['cartItems'])){
 $_SESSION['cartItems'] = array();
 }
-$product_id = $_GET['product_id'];
-$query = "select * from products where product_id = '$product_id'";
-$stmt = $conn->prepare($query);
-$stmt->execute();
-$count = $stmt->rowCount();
-$row   = $stmt->fetch(PDO::FETCH_ASSOC);
+// echo "<pre>";
+// print_r(($_SESSION['cartItems']));
+// echo "</pre>";
+// header('location:cart.php');
 // echo json_encode($row);
-
-if (isset($_GET['addToCart'])) {
+if (isset($_POST['addToCart'])) {
+  unset($_POST['addToCart']);
+  // header('location:cart.php');
+  $product_id = $_POST['product_id'];
+  $query = "select * from products where product_id = '$product_id'";
+  $stmt = $conn->prepare($query);
+  $stmt->execute();
+  $count = $stmt->rowCount();
+  $row = $stmt->fetch(PDO::FETCH_ASSOC);
     // echo "Add To cart"."<br>";
     $id=$_SESSION['product_id'] = $row['product_id'];
     $name=$_SESSION['product_name'] = $row['product_name'];
@@ -21,18 +26,14 @@ if (isset($_GET['addToCart'])) {
     $category=$_SESSION['product_category']= $row['product_category'];
     $price=$_SESSION['product_price' ] = $row['product_price'];
     $quant=$_SESSION['quant' ] = 1;
+    
     $cols=array("id"=>$id,"name"=>"$name", "image"=>"$image","category"=> "$category","price"=>"$price");
     array_push($_SESSION['cartItems'], $cols);
-    $cols="";
-    // echo $count=count($_SESSION['cartItems']);
-    // var_dump($_SESSION['cartItems'])."<br>";
-    // print_r($_SESSION['cartItems']);
-    // foreach($_SESSION['cartItems'] as $k){
-    // print_r($k);
+    unset($cols);
+
 $html='';
 $gt=0;
 // print_r($_SESSION['cartItems']);
-//}//else
 ?>
 <!doctype html>
 <html lang="en">
@@ -103,12 +104,12 @@ $gt=0;
                 <th>Total</th>
             </tr>';
             // die(json_encode($_SESSION['cartItems']));
+            // unset($_SESSION['addToCart']);
+            if(isset($_SESSION['cartItems'])){
             foreach($_SESSION['cartItems'] as $key){
-              if(!$_SESSION['cartItems']){
-                echo "Cart is Empty!!";
-              }
-              else
-            $html.='<tr>
+              $html.="";
+              $gt+=($key['price'] * $quant);
+              $html.='<tr>
                 <td>'.$key['id'].'</td>
                 <td>'.$key['name'].'</td>
                 <td><img src="./productImages/'.$key['image'].'" style="height:50px; width:80px;"></td>
@@ -118,30 +119,42 @@ $gt=0;
                     <input type="number" class="col" value='.$quant.' style="width:80px; text-align:center;">
                 </td>
                 <td>
+                <form action="delete.php" method="POST">
                     <input type="button" class="btn btn-secondary ms-1 w-20" value="Update">
-                    <a href="#" name="" class="link-danger">Remove</a>
+                    <input type="hidden" name="dltId" class="btn btn-secondary ms-1 w-20" value='.$key['id'].'>
+                    <input type="submit" name="delete" class="link-danger" value="Remove">
+               </form>
                 </td>
-                <td>'.(int)($gt=$gt+$key['price'] * $quant).'</td>
+                <td>'.(int)($key['price'] * $quant).'</td>
             </tr>';
+            }
+            // $html="";
+            unset($_POST['addToCart']);
+            unset($_SESSION['addToCart']);
+          }
+            
+            else{
+              echo "UHHOOOO!!! Your cart is empty!!";
+              unset($_SESSION['addToCart']);
             }
 
             $html.='<tfoot>
                 <tr>
                     <td colspan="8" class="text-end">'.$gt.'</td>
+                    
                 </tr>
             </tfoot>
         </table>';
         echo $html;
-          } else{
-               echo "outside add to cart";
-          }
+        $html="";
+        unset($_SESSION['addToCart']);
 
         ?>
       </div>
     </div>
     <div class="row g-5 align-items-right">
         <div class="col-3">
-            <form>
+            <form action="checkout.html" method="post">
                     <input type="submit" class="btn btn-primary" value="CheckOut"></button>
             </form>
             
@@ -156,7 +169,25 @@ $gt=0;
     </ul>
   </footer>
 </div>
+<?php
+$html="";
+unset($_POST['addToCart']);
+unset($_SESSION['addToCart']);
+exit(0);
+if(!isset($_POST['addToCart'])){
+  echo "empty";
+}
+header('location:cart.php');
+// exit(0);
+}
+else {
+  // header('location:cart.php');
+  echo "Cannot directly access cart";
+  // session_destroy();
+}
 
+
+?>
 
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="./assets/js/form-validation.js"></script>
