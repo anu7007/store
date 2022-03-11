@@ -139,7 +139,7 @@ if (!isset($_SESSION['loginmail']) && !isset ($_SESSION['loginpassword'])) {
 
       <p class="text text-muted">Top 3 Customers</p>
       <div class="table-responsive">
-        <table class="table table-striped table-hover">
+        <table class="table table-hover">
           <thead class="table table-dark">
             <tr>
               <th scope="col">ID</th>
@@ -155,7 +155,7 @@ if (!isset($_SESSION['loginmail']) && !isset ($_SESSION['loginpassword'])) {
               $stmt->execute();
             foreach ($stmt as $row) {
             ?>
-          <tbody>
+          <tbody class="table table-striped">
             <tr>
               <td><?php echo $row['ID'];?></td>
               <td><?php echo $row['full_name'];?></td>

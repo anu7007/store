@@ -1,8 +1,8 @@
 <?php
 session_start();
-if (!isset($_SESSION['username'])) {
-    echo 'Kindly  <a href="loginHTML.php">Login</a>  to view Products<?php';
-} else {
+// if (!isset($_SESSION['username'])) {
+//     echo 'Kindly  <a href="loginHTML.php">Login</a>  to view Products<?php';
+// } else {
     require_once 'connect.php';
     require_once 'config.php';
 ?>
@@ -168,7 +168,10 @@ if (!isset($_SESSION['username'])) {
                     <p class='card-text'>".$row['product_category']."</p>
                     <div class='d-flex justify-content-between align-items-center'>
                     <p><strong>"."₹".$row['product_price']."</strong>&nbsp;<del></p>
-                    <button class='btn btn-primary'>Add To Cart</button>
+                    <form action='cart.php' method='get'>
+                    <input type='hidden' name='product_id' value=".$row['product_id'].">
+                    <button type='submit' name='addToCart' class='btn btn-primary'>Add To Cart</button>
+                    </form>
                     </div>
                     </div>
                     </div>
@@ -221,5 +224,4 @@ if (!isset($_SESSION['username'])) {
      crossorigin="anonymous"></script>
   </body>
 </html>
-<?php
-}
+

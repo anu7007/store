@@ -45,6 +45,14 @@ if (!isset($_SESSION['loginmail']) && !isset ($_SESSION['loginpassword'])) {
           font-size: 3.5rem;
         }
       }
+        table,
+        thead,
+        tr,
+        tbody,
+        th,
+        td {
+          text-align: center;
+}
     </style>
 
     
@@ -139,7 +147,7 @@ if (!isset($_SESSION['loginmail']) && !isset ($_SESSION['loginpassword'])) {
 
       <p class="text text-muted">Top 3 Customers</p>
       <div class="table-responsive">
-        <table class="table table-striped table-hover">
+        <table class="table table-striped table-hover text-align:center">
           <thead class="table table-dark">
             <tr>
               <th scope="col">ID</th>
@@ -152,11 +160,11 @@ if (!isset($_SESSION['loginmail']) && !isset ($_SESSION['loginpassword'])) {
             </tr>
           </thead>
             <?php
-              $query = "select * from `register` order by status desc";
+              $query = "select * from `register` order by (CASE when role = 'admin' THEN 0 else 1 END), status desc";
               $stmt = $conn->prepare($query);
               $stmt->execute();
             foreach ($stmt as $row) {
-                if ($row['status']=="pending") {
+                if ($row['status']=="pending" && $row['role']=="user") {
             ?>
           <tbody>
             <tr class="bg bg-danger" style='--bs-bg-opacity: .8;'>
@@ -180,7 +188,7 @@ if (!isset($_SESSION['loginmail']) && !isset ($_SESSION['loginpassword'])) {
           </form>
             </tr>           
             <?php
-                } else {
+                } elseif ($row['status']=="approved" && $row['role']=="user") {
                 ?>
                   <tr class="bg bg-success" style='--bs-bg-opacity: .7;'>
               <td><?php echo $row['ID'];?></td>
@@ -203,9 +211,34 @@ if (!isset($_SESSION['loginmail']) && !isset ($_SESSION['loginpassword'])) {
           </form>
             </tr>
             <?php
+                } else {
+                    ?>
+                      <tr class="bg bg-active" style='--bs-bg-opacity: .7;'>
+                  <td><?php echo $row['ID'];?></td>
+                  <td><?php echo $row['full_name'];?></td>
+                  <td><?php echo $row['username'];?></td>
+                  <td><?php echo $row['email'];?></td>
+                  <td><?php echo $row['status']; ?></td>
+                  <td>
+                      <form action="function.php" method="GET">
+                      <input type="hidden" name="statusName" value="<?php echo $row['status'] ?>">
+                        <?php echo "ADMIN" ?>
+                      <!-- <input type='submit' class='btn btn-warning' value='Change' > -->
+                </form>
+                    </td>
+                  <td>
+                  <form action="function.php" method="GET">
+                      <input type="hidden" name="delete" value="<?php echo $row['ID'] ?>">
+                      <!-- <input type='submit' class='btn btn-danger' value='Delete'/> -->
+                        <del><?php echo "Access" ; ?></del>
+                    </td>
+              </form>
+                </tr>
+                <?php
                 }
             }
-                ?>
+                    ?>
+                
           </tbody>
         </table>
       </div>
