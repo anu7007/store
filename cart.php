@@ -1,7 +1,7 @@
 <?php
 session_start();
-include 'config.php';
-include 'connect.php';
+include_once('config.php');
+include_once('connect.php');
 if(!isset($_SESSION['cartItems'])){
 $_SESSION['cartItems'] = array();
 }

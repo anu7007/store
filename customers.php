@@ -68,7 +68,7 @@ if (!isset($_SESSION['loginmail']) && !isset ($_SESSION['loginpassword'])) {
   aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <input class="form-control form-control-dark w-100 mr-5" type="text" placeholder="Search" aria-label="Search">
+  <input class="form-control form-control-dark w-100 mr-5" id="search" type="text" placeholder="Search" aria-label="Search">
   <div class="navbar-nav">
   <div class="nav-item text-nowrap text-white btn btn-info pt-2 pb-2 px-5 mr-2">
     <?php
@@ -257,5 +257,16 @@ if (!isset($_SESSION['loginmail']) && !isset ($_SESSION['loginpassword'])) {
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js" 
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" 
     crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+      // window.alert("Srch..");
+      $("#search").on("keyup", function() {
+        $(this).val().toLowerCase();
+        $("#body").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+  
+  </script>
   </body>
 </html>

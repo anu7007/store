@@ -6,7 +6,7 @@ if (isset($_POST['delete'])) {
     foreach($_SESSION['cartItems'] as $key => $product)
         {
             // print_r ($_SESSION['cartItems'][$key]);
-            echo $key;
+            // echo $key;
             if ($product['id'] == $id)
             {
                 // echo "36";
